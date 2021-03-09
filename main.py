@@ -6,6 +6,8 @@
 # 5. la classe, a seconda della richiesta, darà la rispota/farà l'azione
 
 import speech_recognition as sr
+from commands import builtin as bin
+from listen import Understand as under
 import sys, os, argparse
 
 default_engine = "google"
@@ -77,7 +79,8 @@ if mode == "audio":
                 # instead of `r.recognize_google(audio)`
                 text = r.recognize_google(audio, language="it-IT")
                 print("Google Speech Recognition thinks you said " + text)
-                # FIXME: Do something
+                say = understand.command_from_speech(text)
+                bin.Builtin.say(say, lang=lang)
             except sr.UnknownValueError:
                 print("Google Speech Recognition could not understand audio")
                 #fts.unknow()
@@ -87,4 +90,5 @@ if mode == "audio":
 else:
     while True:
         text = input("")
-        # TODO: Do something
+        say = understand.command_from_speech(text)
+        bin.Builtin.say(say, lang=lang)
