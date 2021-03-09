@@ -1,5 +1,7 @@
 from commands.Translate import Translate
 from commands.Wikipedia import Wikipedia
+from commands.Music import Music
+from commands.Event import Event
 import pickle, os
 
 class Command:
@@ -28,6 +30,23 @@ class Command:
             if attrs['engine'] == "wikipedia":
                 wiki = Wikipedia(attrs["text"])
                 return wiki.run()
+
+        elif "musica" in txt or "canzoni" in txt or "canzone" in txt:
+            print("Musica")
+            music = Music(txt)
+            return music.run()
+
+        """
+        if "/" in txt or "+" in txt or "-" in txt or "*" in txt:
+            fts.compute(txt)
+            anything = True
+
+
+
+
+        elif anything == False:
+            fts.unknow()
+        """
 
         return False
         pass
