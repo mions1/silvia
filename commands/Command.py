@@ -36,6 +36,20 @@ class Command:
             music = Music(txt)
             return music.run()
 
+        elif "eventi" in txt or "cosa devo fare" in txt or "impegni" in txt or "impegnato" in txt or "che ho da fare" in txt \
+                or "che ho da fa" in txt or "che devo fare oggi" in txt or "che faccio" in txt:
+            print("Eventi NEXT")
+            credentials = pickle.load(open("SilvIA/token.pkl", "rb"))
+            event = Event(text=text, credentials=credentials, function=Event.NEXT, max_results=20)
+            return event.run()
+
+        elif "quando" in txt:
+            print("Eventi SEARCH")
+            credentials = pickle.load(open(Command.TOKEN, "rb"))
+            event = Event(text=text, credentials=credentials, function=Event.SEARCH, max_results=20)
+            return event.run()
+
+
         """
         if "/" in txt or "+" in txt or "-" in txt or "*" in txt:
             fts.compute(txt)
